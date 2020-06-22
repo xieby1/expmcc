@@ -6,7 +6,7 @@ import argparse
 # 1. Config
 # 1.1 Read from environ
 # 1.2 TODO: Read from config files, if not defined in envrion,
-#     when directly executing expmcc/expmcxx falls into this situation
+#     when directly executing expmcc/expmxx falls into this situation
 if "EXPMCC" in os.environ:
     compiler_cc = os.environ["EXPMCC"]
 else:
