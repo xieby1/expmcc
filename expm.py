@@ -33,4 +33,4 @@ if namespace.expmxx:
 
 # 4. Call child process
 if len(rest_argv)>0:
-    subprocess.check_call(rest_argv, env=child_env)
+    subprocess.run(rest_argv, env=child_env)
