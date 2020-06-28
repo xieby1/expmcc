@@ -64,9 +64,14 @@ modified_output_path = os.path.join(
 ## Create directories if path not exist
 if not os.path.exists(os.path.dirname(modified_output_path)):
     os.makedirs(os.path.dirname(modified_output_path))
-## TODO:Check and Modify the file name,
-## e.g. CC:  dir/helloworld.o => dir/helloworld.c
-## e.g. CXX: dir/helloworld.o => dir/helloworld.cpp
+## Check and Modify the file name
+file_name_suffix_index = modified_output_path.rfind('.')
+if file_name_suffix_index >= 0:
+    modified_output_path = modified_output_path[:file_name_suffix_index] # dir/helloworld.ooo => dir/helloworld
+if compiler == compiler_cc:
+    modified_output_path += ".c" # dir/helloworld.c
+else:
+    modified_output_path += ".cpp" # dir/helloworld.cpp
 
 rest_argv[output_path_index] = modified_output_path
 subprocess.run([compiler, "-E"] + rest_argv)
