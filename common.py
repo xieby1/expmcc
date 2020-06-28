@@ -24,3 +24,5 @@ EXPMXX = "EXPMXX"
 ## Common arguments
 arg_expmcc = "--expmcc"
 arg_expmxx = "--expmxx"
+## Compiler arguments, e.g. gcc/gcc, clang/clang++
+args_preprocessing = ["-M", "-MM", "-MF", "-MG", "-MP", "-MT", "-MQ", "-MD", "-MMD"]

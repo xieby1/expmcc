@@ -41,11 +41,21 @@ if directly_exec or original_command_completed.returncode!=0:
 
 # Get original output absolute path.
 if "-o" not in rest_argv:
-    ### Find the real path of this source code, be ware of "gcc dir/helloword.c"
+    ## Check if is only preprocessing
+    is_preprocessing = False
+    for arg in c.args_preprocessing:
+        if arg in rest_argv:
+            is_preprocessing = True
+            break
+    if is_preprocessing:
+        sys.exit()
+    ## Find the real path of this source code, be ware of "gcc dir/helloword.c"
     (stdout, stderr) = subprocess.Popen([compiler, "-MM"] + rest_argv, stdout=subprocess.PIPE).communicate()
     source_code_path = stdout.split(b':', 1)[1] # b'helloworld.o: dir/helloworld.c\n' => # b' dir/helloworld.c\n'
     if source_code_path.count(b'\n')>1:
-        print("Warning!")# TODO: error 
+        print("Warning!")# TODO: error
+        print(["command:"] + [compiler, "-MM"] + rest_argv)
+        print(b"stdout" + stdout) 
     source_code_path = source_code_path.replace(b' ', b'').replace(b'\n', b'') # b'dir/helloworld.c'
     rest_argv.append("-o")
     rest_argv.append(source_code_path.decode())
