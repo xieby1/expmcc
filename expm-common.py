@@ -51,6 +51,8 @@ if "-o" not in rest_argv:
         sys.exit()
     ## Find the real path of this source code, be ware of "gcc dir/helloword.c"
     (stdout, stderr) = subprocess.Popen([compiler, "-MM"] + rest_argv, stdout=subprocess.PIPE).communicate()
+    if b':' not in stdout:
+        sys.exit()
     source_code_path = stdout.split(b':', 1)[1] # b'helloworld.o: dir/helloworld.c\n' => # b' dir/helloworld.c\n'
     if source_code_path.count(b'\n')>1:
         print("Warning!")# TODO: error
