@@ -7,7 +7,7 @@ setup(
     name="expmcc",
     description="EXPand the Macro when compiling C/C++ files",
     version=(here / "expm" / "VERSION").read_text(encoding="utf-8"),
-    url="https://github.com/xieby1/expm",
+    url="https://github.com/xieby1/expmcc",
     author="xieby1",
     author_email="xieby1@outlook.com",
     keywords="c/c++, compiler, macro expansion",
